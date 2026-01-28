@@ -19,7 +19,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/de2pressed/Wanderlust-Mega-Project.git","main")
+                    checkout scm
                 }
             }
         }
