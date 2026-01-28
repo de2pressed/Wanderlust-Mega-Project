@@ -45,17 +45,16 @@ pipeline {
             }
         }
 
-        stage("OWASP: Dependency check"){
-            steps{
-            withCredentials([string(credentialsId: 'NVD_API_KEY', variable: 'NVD_API_KEY')]) {
-            script {
-                owasp_dependency(
-                    additionalArguments: "--nvdApiKey ${NVD_API_KEY}"
+        stage("OWASP: Dependency check") {
+            steps {
+                withCredentials([string(credentialsId: 'NVD_API_KEY', variable: 'NVD_API_KEY')]) {
+                    owasp_dependency(
+                        additionalArguments: "--nvdApiKey ${NVD_API_KEY}"
                     )
                 }
             }
         }
-        }
+
         
         stage("SonarQube: Code Analysis"){
             steps{
