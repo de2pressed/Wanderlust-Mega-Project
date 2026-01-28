@@ -46,9 +46,11 @@ pipeline {
         }
 
         stage("OWASP: Dependency check"){
-            steps{
-                script{
-                    owasp_dependency()
+            withCredentials([string(credentialsId: 'NVD_API_KEY', variable: 'NVD_API_KEY')]) {
+            script {
+                owasp_dependency(
+                    additionalArguments: "--nvdApiKey ${NVD_API_KEY}"
+                    )
                 }
             }
         }
