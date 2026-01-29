@@ -53,6 +53,7 @@ stage('Install Dependencies') {
             steps {
                 dir('frontend') {
                     sh 'npm install'
+                    sh 'npm audit fix'
                 }
             }
         }
@@ -60,6 +61,7 @@ stage('Install Dependencies') {
             steps {
                 dir('backend') {
                     sh 'npm install'
+                    sh 'npm audit fix'
                 }
             }
         }
