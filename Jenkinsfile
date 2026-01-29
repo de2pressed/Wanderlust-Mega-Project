@@ -1,6 +1,9 @@
 @Library('Shared') _
 pipeline {
     agent any
+    tools {
+    nodejs 'node18'
+}
     
     environment{
         SONAR_HOME = tool "Sonar"
