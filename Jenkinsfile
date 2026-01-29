@@ -47,25 +47,34 @@ pipeline {
                 }
             }
         }
-stage('Install Dependencies') {
-    parallel {
-        stage('Frontend deps') {
-            steps {
-                dir('frontend') {
-                    sh 'npm install'
-                    sh 'npm audit fix --force'
-                    sh 'npm audit fix --force'
-                    sh 'npm audit fix --force'
-                }
-            }
+stage('Frontend: Install deps') {
+    steps {
+        dir('frontend') {
+            sh 'npm ci'
         }
-        stage('Backend deps') {
-            steps {
-                dir('backend') {
-                    sh 'npm install'
-                    sh 'npm audit fix'
-                }
-            }
+    }
+}
+
+stage('Frontend: Security audit') {
+    steps {
+        dir('frontend') {
+            sh 'npm audit --audit-level=high'
+        }
+    }
+}
+
+stage('Backend: Install deps') {
+    steps {
+        dir('backend') {
+            sh 'npm ci'
+        }
+    }
+}
+
+stage('Backend: Security audit') {
+    steps {
+        dir('backend') {
+            sh 'npm audit --audit-level=high'
         }
     }
 }
