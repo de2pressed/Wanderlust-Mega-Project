@@ -44,6 +44,14 @@ pipeline {
                 }
             }
         }
+      stage('Install Frontend Dependencies') {
+    steps {
+        dir('frontend') {
+            sh 'npm ci'
+        }
+    }
+}
+
 
         stage("OWASP: Dependency check") {
             steps {
