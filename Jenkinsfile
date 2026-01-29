@@ -53,7 +53,7 @@ stage('Install Dependencies') {
             steps {
                 dir('frontend') {
                     sh 'npm install'
-                    sh 'npm audit fix'
+                    sh 'npm audit fix --force'
                 }
             }
         }
